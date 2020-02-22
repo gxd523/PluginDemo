@@ -15,6 +15,7 @@ import dalvik.system.DexClassLoader;
  * Created by guoxiaodong on 2020-02-22 14:14
  */
 public class PluginManager {
+    public static final String PLUGIN_APK = "plugin-debug.apk";
     private static final PluginManager instance = new PluginManager();
     private Resources resources;
     private DexClassLoader dexClassLoader;
@@ -26,7 +27,7 @@ public class PluginManager {
 
     public void loadPlugin(Context context) throws Exception {
         File pluginDir = context.getDir("plugin", Context.MODE_PRIVATE);
-        String pluginApkAbsolutePath = new File(pluginDir, "plugin.apk").getAbsolutePath();
+        String pluginApkAbsolutePath = new File(pluginDir, PLUGIN_APK).getAbsolutePath();
 
         PackageManager packageManager = context.getPackageManager();
         packageInfo = packageManager.getPackageArchiveInfo(pluginApkAbsolutePath, PackageManager.GET_ACTIVITIES);

@@ -1,6 +1,7 @@
 package com.demo.sample;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -16,9 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import androidx.core.content.ContextCompat;
-
 public class MainActivity extends Activity {
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
         for (String permission : permissions) {
-            int checkSelfPermissionResult = ContextCompat.checkSelfPermission(this, permission);
+            int checkSelfPermissionResult = checkSelfPermission(permission);
             if (checkSelfPermissionResult != PackageManager.PERMISSION_GRANTED) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{permission}, 999);
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
     }
 
     public void onLoadPluginClick(View view) {
-        File pluginApkDestPath = new File(getDir("plugin", Context.MODE_PRIVATE), "plugin.apk").getAbsoluteFile();
+        File pluginApkDestPath = new File(getDir("plugin", Context.MODE_PRIVATE), PluginManager.PLUGIN_APK).getAbsoluteFile();
         if (pluginApkDestPath.exists()) {
             pluginApkDestPath.delete();
             Log.d("gxd", "删除data目录下已存在的插件apk");
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
         FileInputStream inputStream = null;
         FileOutputStream outputStream = null;
         try {
-            File pluginApkSrcPath = new File(Environment.getExternalStorageDirectory(), "plugin.apk");
+            File pluginApkSrcPath = new File(Environment.getExternalStorageDirectory(), PluginManager.PLUGIN_APK);
             if (!pluginApkSrcPath.exists()) {
                 Log.d("gxd", "外部存储目录没有插件apk..." + pluginApkSrcPath);
                 return;

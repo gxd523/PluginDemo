@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.plugin.sample">
 
-    <application
-        android:icon="@mipmap/ic_launcher"
-        android:label="parasite"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.demo.plugin.sample.PluginActivity" />
+    <application tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".PluginActivity" />
+        <activity android:name=".AnotherPluginActivity" />
     </application>
 </manifest>
