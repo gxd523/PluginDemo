@@ -36,7 +36,22 @@ public class MainActivity extends Activity {
     }
 
     public void onLoadPluginClick(View view) {
-        File pluginApkDestPath = new File(getDir("plugin", Context.MODE_PRIVATE), PluginManager.PLUGIN_APK).getAbsoluteFile();
+        copyPluginApk(pluginApkDestPath -> {
+            if (pluginApkDestPath.exists()) {
+                Log.d("gxd", "拷贝成功!..." + pluginApkDestPath.getAbsolutePath());
+                try {
+                    PluginManager.getInstance().loadPlugin(MainActivity.this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void copyPluginApk(Func1<File> func1) {
+        File pluginApkDestPath = new File(
+                getDir("plugin", Context.MODE_PRIVATE), PluginManager.PLUGIN_APK
+        ).getAbsoluteFile();
         if (pluginApkDestPath.exists()) {
             pluginApkDestPath.delete();
             Log.d("gxd", "删除data目录下已存在的插件apk");
@@ -57,11 +72,6 @@ public class MainActivity extends Activity {
             while ((length = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, length);
             }
-
-            if (pluginApkDestPath.exists()) {
-                Log.d("gxd", "拷贝成功!..." + pluginApkDestPath.getAbsolutePath());
-                PluginManager.getInstance().loadPlugin(this);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -75,6 +85,7 @@ public class MainActivity extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            func1.call(pluginApkDestPath);
         }
     }
 
