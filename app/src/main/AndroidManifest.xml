@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.sample">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="PluginDemo"
         android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
         tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:name=".ProxyService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity android:name=".ProxyActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

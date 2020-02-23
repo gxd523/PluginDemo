@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 /**
  * Created by guoxiaodong on 2020-02-21 18:56
  */
-public interface IPluginProxy {
+public interface IProxyActivity {
     void attachProxy(Activity proxyActivity);
 
     void onProxyCreate(Bundle savedInstanceState);

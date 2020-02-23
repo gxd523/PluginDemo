@@ -1,15 +1,25 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF">
+    android:background="#FFF"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/jump_activity_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="跳转另一个插件页面"
+        android:text="跳转到AnotherPluginActivity"
         android:textColor="#000"
         android:textSize="30sp" />
-</FrameLayout>
+
+    <Button
+        android:id="@+id/jump_service_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchServiceClick"
+        android:text="跳转到PluginService"
+        android:textColor="#000"
+        android:textSize="30sp" />
+</LinearLayout>

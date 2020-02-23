@@ -1,16 +1,17 @@
 package com.demo.sample;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
-import com.demo.plugin.IPluginProxy;
+import com.demo.plugin.IProxyActivity;
 
 public class ProxyActivity extends Activity {
-    private IPluginProxy pluginActivity;
+    private IProxyActivity pluginActivity;
 
     public static void startActivity(Context context, String className) {
         Intent intent = new Intent(context, ProxyActivity.class);
@@ -33,8 +34,9 @@ public class ProxyActivity extends Activity {
         super.onCreate(savedInstanceState);
         String className = getIntent().getStringExtra("className");
         try {
+            // 注意这里是getClassLoader()
             Class pluginActivityClass = getClassLoader().loadClass(className);
-            pluginActivity = (IPluginProxy) pluginActivityClass.newInstance();
+            pluginActivity = (IProxyActivity) pluginActivityClass.newInstance();
             pluginActivity.attachProxy(this);
             pluginActivity.onProxyCreate(savedInstanceState);
         } catch (Exception e) {
@@ -48,6 +50,14 @@ public class ProxyActivity extends Activity {
         Intent intent1 = new Intent(this, ProxyActivity.class);
         intent1.putExtra("className", className);
         super.startActivity(intent1);
+    }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        String classNames = service.getStringExtra("className");
+        Intent intent = new Intent(this, ProxyService.class);
+        intent.putExtra("className", classNames);
+        return super.startService(intent);
     }
 
     @Override

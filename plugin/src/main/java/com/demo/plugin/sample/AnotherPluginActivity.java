@@ -2,6 +2,8 @@ package com.demo.plugin.sample;
 
 import android.os.Bundle;
 
+import com.demo.plugin.sample.base.BasePluginActivity;
+
 /**
  * Created by guoxiaodong on 2020-02-22 17:21
  */

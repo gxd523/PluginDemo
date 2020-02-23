@@ -1,17 +1,18 @@
-package com.demo.plugin.sample;
+package com.demo.plugin.sample.base;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.demo.plugin.IPluginProxy;
+import com.demo.plugin.IProxyActivity;
 
 /**
  * Created by guoxiaodong on 2020-02-22 17:22
  */
-public abstract class BasePluginActivity extends Activity implements IPluginProxy {
+public abstract class BasePluginActivity extends Activity implements IProxyActivity {
     protected Activity that;
 
     @Override
@@ -71,5 +72,12 @@ public abstract class BasePluginActivity extends Activity implements IPluginProx
         Intent intent1 = new Intent();
         intent1.putExtra("className", intent.getComponent().getClassName());
         that.startActivity(intent1);
+    }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        Intent intent = new Intent();
+        intent.putExtra("className", service.getComponent().getClassName());
+        return that.startService(intent);
     }
 }

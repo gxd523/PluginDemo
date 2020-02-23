@@ -1,14 +1,9 @@
 package com.demo.sample;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -18,21 +13,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends Activity {
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-        for (String permission : permissions) {
-            int checkSelfPermissionResult = checkSelfPermission(permission);
-            if (checkSelfPermissionResult != PackageManager.PERMISSION_GRANTED) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{permission}, 999);
-                }
-            }
-        }
     }
 
     public void onLoadPluginClick(View view) {

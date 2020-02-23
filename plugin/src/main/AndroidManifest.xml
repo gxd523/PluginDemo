@@ -6,5 +6,7 @@
     <application tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".PluginActivity" />
         <activity android:name=".AnotherPluginActivity" />
+
+        <service android:name=".PluginService" />
     </application>
 </manifest>

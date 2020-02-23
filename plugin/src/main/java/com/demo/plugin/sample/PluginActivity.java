@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.demo.plugin.sample.base.BasePluginActivity;
+
 public class PluginActivity extends BasePluginActivity {
     @Override
     public void onProxyCreate(Bundle savedInstanceState) {
@@ -12,11 +14,17 @@ public class PluginActivity extends BasePluginActivity {
 
         Log.d("gxd", getClass().getSimpleName() + ".onProxyCreate()....");
 
-        View btn = findViewById(R.id.btn);
+        View btn = findViewById(R.id.jump_activity_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(that, AnotherPluginActivity.class));
+            }
+        });
+        findViewById(R.id.jump_service_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService(new Intent(that, PluginService.class));
             }
         });
     }
