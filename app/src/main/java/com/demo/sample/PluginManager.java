@@ -25,6 +25,9 @@ public class PluginManager {
         return instance;
     }
 
+    /**
+     * 插桩式插件的核心
+     */
     public void loadPlugin(Context context) throws Exception {
         File pluginDir = context.getDir("plugin", Context.MODE_PRIVATE);
         String pluginApkAbsolutePath = new File(pluginDir, PLUGIN_APK).getAbsolutePath();

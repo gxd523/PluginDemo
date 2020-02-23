@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
                     PluginManager.getInstance().loadPlugin(MainActivity.this);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Log.d("gxd", "插件加载失败!");
                 }
             }
         });
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
         FileInputStream inputStream = null;
         FileOutputStream outputStream = null;
         try {
-            File pluginApkSrcPath = new File(Environment.getExternalStorageDirectory(), PluginManager.PLUGIN_APK);
+            File pluginApkSrcPath = new File(getExternalFilesDir(null), PluginManager.PLUGIN_APK);
             if (!pluginApkSrcPath.exists()) {
                 Log.d("gxd", "外部存储目录没有插件apk..." + pluginApkSrcPath);
                 return;
@@ -74,6 +75,7 @@ public class MainActivity extends Activity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d("gxd", "拷贝插件失败!");
         } finally {
             try {
                 if (inputStream != null) {
