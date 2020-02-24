@@ -68,7 +68,7 @@ public class ProxyActivity extends Activity {
         for (int i = 0; i < filter.countActions(); i++) {
             intentFilter.addAction(filter.getAction(i));
         }
-        return super.registerReceiver(new ProxyReceiver(receiver.getClass().getName(), this), filter);
+        return super.registerReceiver(new DynamicProxyReceiver(receiver.getClass().getName(), this), filter);
     }
 
     @Override

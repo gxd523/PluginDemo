@@ -1,7 +1,10 @@
 package com.demo.sample;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +20,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("gxd", "MainActivity.onReceive-->" + intent.getAction());
+            }
+        }, new IntentFilter("com.demo.plugin.static.broadcast"));
     }
 
     public void onLoadPluginClick(View view) {
@@ -80,5 +90,9 @@ public class MainActivity extends Activity {
         String className = activities[0].name;
         Log.d("gxd", "启动插件Activity..." + className);
         ProxyActivity.startActivity(this, className);
+    }
+
+    public void onSendBroadcastClick(View view) {
+        sendBroadcast(new Intent("com.demo.broadcast"));
     }
 }

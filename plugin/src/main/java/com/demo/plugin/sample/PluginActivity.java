@@ -9,6 +9,8 @@ import android.view.View;
 import com.demo.plugin.sample.base.BasePluginActivity;
 
 public class PluginActivity extends BasePluginActivity {
+    public static final String DYNAMIC_BROADCAST = "com.demo.plugin.dynamic.broadcast";
+
     @Override
     public void onProxyCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_plugin);
@@ -33,7 +35,7 @@ public class PluginActivity extends BasePluginActivity {
             @Override
             public void onClick(View v) {
                 IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction("com.demo.plugin.broadcast");
+                intentFilter.addAction(DYNAMIC_BROADCAST);
                 registerReceiver(new DynamicPluginReceiver(), intentFilter);
             }
         });
@@ -42,7 +44,7 @@ public class PluginActivity extends BasePluginActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setAction("com.demo.plugin.broadcast");
+                intent.setAction(DYNAMIC_BROADCAST);
                 sendBroadcast(intent);
             }
         });

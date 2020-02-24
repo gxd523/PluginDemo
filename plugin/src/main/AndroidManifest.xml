@@ -8,5 +8,10 @@
         <activity android:name=".AnotherPluginActivity" />
 
         <service android:name=".PluginService" />
+        <receiver android:name=".StaticPluginReceiver">
+            <intent-filter>
+                <action android:name="com.demo.broadcast" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

@@ -9,10 +9,10 @@ import com.demo.plugin.IProxyBroadcastReceiver;
 /**
  * Created by guoxiaodong on 2020-02-24 13:24
  */
-public class ProxyReceiver extends BroadcastReceiver {
+public class DynamicProxyReceiver extends BroadcastReceiver {
     private IProxyBroadcastReceiver pluginReceiver;
 
-    public ProxyReceiver(String className, Context context) {
+    public DynamicProxyReceiver(String className, Context context) {
         try {
             Class pluginReceiverClass = PluginManager.getInstance().getDexClassLoader().loadClass(className);
             pluginReceiver = (IProxyBroadcastReceiver) pluginReceiverClass.newInstance();

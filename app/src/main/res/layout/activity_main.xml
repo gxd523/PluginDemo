@@ -19,4 +19,11 @@
         android:onClick="onLaunchPluginClick"
         android:text="启动页面"
         android:textSize="30sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSendBroadcastClick"
+        android:text="向插件发送广播"
+        android:textSize="30sp" />
 </LinearLayout>
