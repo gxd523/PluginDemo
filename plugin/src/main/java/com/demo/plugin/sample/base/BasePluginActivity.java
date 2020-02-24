@@ -1,8 +1,10 @@
 package com.demo.plugin.sample.base;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -79,5 +81,15 @@ public abstract class BasePluginActivity extends Activity implements IProxyActiv
         Intent intent = new Intent();
         intent.putExtra("className", service.getComponent().getClassName());
         return that.startService(intent);
+    }
+
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        return that.registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void sendBroadcast(Intent intent) {
+        that.sendBroadcast(intent);
     }
 }

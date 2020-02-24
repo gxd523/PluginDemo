@@ -19,7 +19,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onLaunchServiceClick"
-        android:text="跳转到PluginService"
+        android:text="启动PluginService"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/register_receive_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onRegisterReceiveClick"
+        android:text="动态注册广播接收者"
+        android:textColor="#000"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/send_broadcast_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSendBroadcastClick"
+        android:text="发送广播"
         android:textColor="#000"
         android:textSize="30sp" />
 </LinearLayout>

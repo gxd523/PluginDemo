@@ -1,9 +1,11 @@
 package com.demo.sample;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -58,6 +60,15 @@ public class ProxyActivity extends Activity {
         Intent intent = new Intent(this, ProxyService.class);
         intent.putExtra("className", classNames);
         return super.startService(intent);
+    }
+
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        IntentFilter intentFilter = new IntentFilter();
+        for (int i = 0; i < filter.countActions(); i++) {
+            intentFilter.addAction(filter.getAction(i));
+        }
+        return super.registerReceiver(new ProxyReceiver(receiver.getClass().getName(), this), filter);
     }
 
     @Override

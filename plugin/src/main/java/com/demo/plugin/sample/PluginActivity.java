@@ -1,6 +1,7 @@
 package com.demo.plugin.sample;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,24 @@ public class PluginActivity extends BasePluginActivity {
             @Override
             public void onClick(View v) {
                 startService(new Intent(that, PluginService.class));
+            }
+        });
+
+        findViewById(R.id.register_receive_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentFilter intentFilter = new IntentFilter();
+                intentFilter.addAction("com.demo.plugin.broadcast");
+                registerReceiver(new DynamicPluginReceiver(), intentFilter);
+            }
+        });
+
+        findViewById(R.id.send_broadcast_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("com.demo.plugin.broadcast");
+                sendBroadcast(intent);
             }
         });
     }
