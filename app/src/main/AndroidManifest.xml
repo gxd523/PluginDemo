@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.sample">
 
     <application
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@android:drawable/sym_def_app_icon"
         android:label="PluginDemo"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         <service
             android:name=".ProxyService"
             android:enabled="true"

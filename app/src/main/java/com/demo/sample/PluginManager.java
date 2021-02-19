@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import dalvik.system.DexClassLoader;
+import dalvik.system.PathClassLoader;
 
 /**
  * Created by guoxiaodong on 2020-02-22 14:14
@@ -23,7 +23,7 @@ public class PluginManager {
     public static final String PLUGIN_APK = "plugin-debug.apk";
     private static final PluginManager instance = new PluginManager();
     private Resources resources;
-    private DexClassLoader dexClassLoader;
+    private PathClassLoader dexClassLoader;
     private PackageInfo packageInfo;
 
     public static PluginManager getInstance() {
@@ -40,8 +40,7 @@ public class PluginManager {
         PackageManager packageManager = context.getPackageManager();
         packageInfo = packageManager.getPackageArchiveInfo(pluginApkAbsolutePath, PackageManager.GET_ACTIVITIES);
 
-        String dexDirAbsolutePath = context.getDir("dex", Context.MODE_PRIVATE).getAbsolutePath();
-        dexClassLoader = new DexClassLoader(pluginApkAbsolutePath, dexDirAbsolutePath, null, context.getClassLoader());
+        dexClassLoader = new PathClassLoader(pluginApkAbsolutePath, null, context.getClassLoader());
 
         AssetManager assetManager = AssetManager.class.newInstance();
         Method addAssetPath = AssetManager.class.getMethod("addAssetPath", String.class);
@@ -105,7 +104,7 @@ public class PluginManager {
         return resources;
     }
 
-    public DexClassLoader getDexClassLoader() {
+    public PathClassLoader getDexClassLoader() {
         return dexClassLoader;
     }
 
